@@ -1,17 +1,19 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-image: url('https://images-ext-1.discordapp.net/external/Tw9u-dUJciR9UkpiaPD0DAXsbRcxQ2XscKg-OTTN7k8/https/i.ibb.co/p6bWPB6j/5.png?format=webp&quality=lossless&width=1191&height=670');
+    background-size: cover; /* لتغطية الخلفية بالكامل */
+    background-position: center; /* لتوسيع الخلفية في المنتصف */
     margin: 0;
-    padding: 20px;
+    padding: 10px;
 }
 
 .container {
     max-width: 600px;
     margin: auto;
-    background: white;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.9); /* خلفية بيضاء مع شفافية */
+    padding: 20px; /* زيادة padding لجعل المحتوى أكثر راحة */
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* زيادة الظل لجعلها أكثر بروزًا */
 }
 
 h1, h2 {
@@ -24,7 +26,7 @@ input, textarea, select {
     width: 100%;
     padding: 12px;
     margin: 10px 0;
-    border: 2px solid #bdc3c7;
+    border: 2px solid #254d67;
     border-radius: 8px;
     box-sizing: border-box;
     font-size: 16px;
@@ -41,7 +43,7 @@ select:focus {
 button {
     width: 100%;
     padding: 12px;
-    background-color: #27ae60;
+    background-color: #284c78;
     color: white;
     border: none;
     border-radius: 8px;
@@ -66,28 +68,28 @@ ul {
 }
 
 li {
-    background: #ffffff;
+    background: #0026ff; /* لون الخلفية للأكواد المحفوظة */
     margin: 15px 0;
     padding: 20px;
     border-radius: 8px;
     border: 1px solid #ecf0f1;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 4px rgba(91, 146, 228, 0.1);
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
 li:hover {
     transform: translateX(5px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(46, 38, 122, 0.1);
 }
 
 pre {
-    background: #f8f9fa;
+    background: #00fff2; /* لون الخلفية للنص البرمجي */
     padding: 15px;
     border-radius: 6px;
     overflow-x: auto;
     white-space: pre-wrap;
     font-family: 'Courier New', monospace;
-    color: #2c3e50;
+    color: #000; /* تغيير لون النص إلى الأسود لزيادة التباين */
     line-height: 1.5;
     margin: 10px 0 0 0;
 }
@@ -111,4 +113,18 @@ pre {
     pre {
         font-size: 14px;
     }
+}
+
+/* تصميم صفحة الدعم الفني */
+footer {
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.8); /* خلفية بيضاء مع شفافية */
+    border-radius: 8px;
+}
+
+footer p {
+    margin: 0;
+    color: #34495e;
 }

@@ -5,24 +5,177 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>موقع حفظ الأكواد البرمجية</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* تنسيق النموذج لإبلاغ عن مشكلة */
+        #supportForm {
+            position: absolute; /* لجعل النموذج في الزاوية العلوية اليمنى */
+            top: 20px; /* المسافة من الأعلى */
+            right: 20px; /* المسافة من اليمين */
+            background: rgba(255, 255, 255, 0.9); /* خلفية بيضاء مع شفافية */
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            width: 300px; /* عرض ثابت للنموذج */
+        }
+
+        #supportForm h2 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        #supportForm label {
+            display: block;
+            margin: 5px 0;
+        }
+
+        #supportForm textarea,
+        #supportForm input {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #bdc3c7;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        #supportForm button {
+            width: 100%;
+            padding: 10px;
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #supportForm button:hover {
+            background-color: #219a52;
+        }
+
+        .code-item {
+            cursor: pointer;
+            margin: 5px 0;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+        }
+
+        .code-content {
+            display: none; /* إخفاء محتوى الكود بشكل افتراضي */
+            padding: 10px;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            margin-top: 5px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <h1>حفظ الأكواد البرمجية</h1>
         <form id="codeForm">
             <input type="text" id="codeName" placeholder="اسم الكود" required>
-            <textarea id="codeContent" placeholder="اكتب الكود هنا..." required></textarea>
+            <textarea id="codeContent" placeholder="اكتب الكود هنا." required></textarea>
             <select id="codeType">
+                <option value="java">java</option>
                 <option value="javascript">JavaScript</option>
                 <option value="html">HTML</option>
                 <option value="css">CSS</option>
                 <option value="python">Python</option>
+                <option value="++c">++C</option>
+                <option value="#c">#C</option>
+                <option value="php.">PHP.</option>
             </select>
             <button type="submit" id="saveButton">حفظ الكود</button>
         </form>
         <h2>الأكواد المحفوظة</h2>
         <ul id="codeList"></ul>
+        <button id="goToReadyCodes">الانتقال إلى الأكواد البرمجية الجاهزة</button>
     </div>
+
+    <form id="supportForm">
+        <h2>أبلغ عن مشكلة</h2>
+        <label for="issue">وصف المشكلة:</label>
+        <textarea id="issue" name="issue" required></textarea>
+        
+        <label for="user">اسم المستخدم أو البريد الإلكتروني:</label>
+        <input type="text" id="user" name="user" required>
+        
+        <button type="submit">إرسال</button>
+    </form>
+
+    <footer>
+        <p>للمساعدة، يرجى زيارة <a href="https://discord.gg/12h">صفحة الدعم الفني</a>.</p>
+    </footer>
+    
     <script src="script.js"></script>
+    <script>
+        // كود JavaScript لحفظ الأكواد وعرضها
+        document.getElementById('codeForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // منع إعادة تحميل الصفحة
+
+            const codeName = document.getElementById('codeName').value;
+            const codeContent = document.getElementById('codeContent').value;
+
+            const codeList = document.getElementById('codeList');
+            const codeItem = document.createElement('li');
+            codeItem.className = 'code-item';
+            codeItem.textContent = codeName;
+
+            const codeContentDiv = document.createElement('div');
+            codeContentDiv.className = 'code-content';
+            codeContentDiv.textContent = codeContent;
+
+            codeItem.appendChild(codeContentDiv);
+            codeList.appendChild(codeItem);
+
+            // إضافة حدث عند الضغط على اسم الكود لإظهار/إخفاء المحتوى
+            codeItem.addEventListener('click', function() {
+                codeContentDiv.style.display = codeContentDiv.style.display === 'none' ? 'block' : 'none';
+            });
+
+            // إعادة تعيين النموذج
+            document.getElementById('codeForm').reset();
+        });
+
+        // الانتقال إلى صفحة الأكواد الجاهزة
+        document.getElementById('goToReadyCodes').addEventListener('click', function() {
+            window.location.href = 'ready-codes.html'; // الانتقال إلى الصفحة الجديدة
+        });
+
+        // كود JavaScript لإرسال المشكلة إلى Discord webhook
+        document.getElementById('supportForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // منع إعادة تحميل الصفحة
+
+            const issue = document.getElementById('issue').value;
+            const user = document.getElementById('user').value;
+
+            const webhookURL = 'https://canary.discord.com/api/webhooks/1340318581895991390/9s6wzbgDvCpSjbP6f8MP6wCTmadKXtEXBSV2ynVSSKxHjbifG08lTLsDtNSDG8wx8ZKl'; // استبدل برابط الويب هوك الخاص بك
+
+            const message = {
+                content: `مشكلة جديدة:\n\n**الوصف:** ${issue}\n**المستخدم:** ${user}`
+            };
+
+            fetch(webhookURL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(message)
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('تم إرسال المشكلة بنجاح!');
+                    document.getElementById('supportForm').reset(); // إعادة تعيين النموذج
+                } else {
+                    alert('حدث خطأ أثناء إرسال المشكلة. حاول مرة أخرى.');
+                }
+            })
+            .catch(error => {
+                alert('حدث خطأ أثناء إرسال المشكلة. حاول مرة أخرى.');
+                console.error('Error:', error);
+            });
+        });
+    </script>
 </body>
 </html>
